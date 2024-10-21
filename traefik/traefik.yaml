@@ -1,0 +1,54 @@
+api:
+  dashboard: true
+  debug: true
+  insecure: true
+
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    watch: true
+log:
+  filePath: "/var/log/traefik.log"
+  level: DEBUG
+
+serversTransport:
+  insecureSkipVerify: true
+
+certificatesResolvers:
+  adminresolver:
+    acme:
+      email: xdangminhtruongx@gmail.com
+      caServer: https://acme-v02.api.letsencrypt.org/directory
+      storage: adminacme.json
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 0
+      httpChallenge:
+        entryPoint: http
+  apiresolver:
+    acme:
+      email: xdangminhtruongx@gmail.com
+      caServer: https://acme-v02.api.letsencrypt.org/directory
+      storage: apiacme.json
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 0
+      httpChallenge:
+        entryPoint: http
+  myresolver:
+    acme:
+      email: xdangminhtruongx@gmail.com
+      caServer: https://acme-v02.api.letsencrypt.org/directory
+      storage: acme.json
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 0
+      httpChallenge:
+        entryPoint: http
