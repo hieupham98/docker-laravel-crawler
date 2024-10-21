@@ -9,10 +9,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik/traefik.yaml:/traefik.yml:ro
-    environment:
-      - DO_AUTH_TOKEN=${DO_AUTH_TOKEN}
-      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}
-      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`traefik.localhost`)"
